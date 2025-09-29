@@ -6,8 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8BBD59E82E8965EA0086E015 /* ModelRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59E72E8965EA0086E015 /* ModelRunner.swift */; };
+		8BBD59EA2E8965ED0086E015 /* UIImage+Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59E92E8965ED0086E015 /* UIImage+Processing.swift */; };
+		8BBD59EE2E896B400086E015 /* yolo11n.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59ED2E896B400086E015 /* yolo11n.mlpackage */; };
+		8BBD59F02E896DA10086E015 /* yolo11l.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59EF2E896DA10086E015 /* yolo11l.mlpackage */; };
+		8BBD59F42E896DAC0086E015 /* yolo11m.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F12E896DAC0086E015 /* yolo11m.mlpackage */; };
+		8BBD59F52E896DAC0086E015 /* yolo11x.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F32E896DAC0086E015 /* yolo11x.mlpackage */; };
+		8BBD59F62E896DAC0086E015 /* yolo11s.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F22E896DAC0086E015 /* yolo11s.mlpackage */; };
+		8BBD59F82E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F72E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		8BBD59D72E8961130086E015 /* objspeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objspeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BBD59E72E8965EA0086E015 /* ModelRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRunner.swift; sourceTree = "<group>"; };
+		8BBD59E92E8965ED0086E015 /* UIImage+Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Processing.swift"; sourceTree = "<group>"; };
+		8BBD59ED2E896B400086E015 /* yolo11n.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolo11n.mlpackage; sourceTree = "<group>"; };
+		8BBD59EF2E896DA10086E015 /* yolo11l.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolo11l.mlpackage; sourceTree = "<group>"; };
+		8BBD59F12E896DAC0086E015 /* yolo11m.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolo11m.mlpackage; sourceTree = "<group>"; };
+		8BBD59F22E896DAC0086E015 /* yolo11s.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolo11s.mlpackage; sourceTree = "<group>"; };
+		8BBD59F32E896DAC0086E015 /* yolo11x.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = yolo11x.mlpackage; sourceTree = "<group>"; };
+		8BBD59F72E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = DETRResnet50SemanticSegmentationF16.mlpackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -34,6 +53,14 @@
 			children = (
 				8BBD59D92E8961130086E015 /* objspeed */,
 				8BBD59D82E8961130086E015 /* Products */,
+				8BBD59E72E8965EA0086E015 /* ModelRunner.swift */,
+				8BBD59E92E8965ED0086E015 /* UIImage+Processing.swift */,
+				8BBD59ED2E896B400086E015 /* yolo11n.mlpackage */,
+				8BBD59EF2E896DA10086E015 /* yolo11l.mlpackage */,
+				8BBD59F12E896DAC0086E015 /* yolo11m.mlpackage */,
+				8BBD59F22E896DAC0086E015 /* yolo11s.mlpackage */,
+				8BBD59F32E896DAC0086E015 /* yolo11x.mlpackage */,
+				8BBD59F72E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +146,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BBD59F02E896DA10086E015 /* yolo11l.mlpackage in Sources */,
+				8BBD59F42E896DAC0086E015 /* yolo11m.mlpackage in Sources */,
+				8BBD59F82E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage in Sources */,
+				8BBD59F52E896DAC0086E015 /* yolo11x.mlpackage in Sources */,
+				8BBD59F62E896DAC0086E015 /* yolo11s.mlpackage in Sources */,
+				8BBD59EA2E8965ED0086E015 /* UIImage+Processing.swift in Sources */,
+				8BBD59E82E8965EA0086E015 /* ModelRunner.swift in Sources */,
+				8BBD59EE2E896B400086E015 /* yolo11n.mlpackage in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,11 +291,13 @@
 				DEVELOPMENT_TEAM = 6Q69T2CBY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "lidar pic";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -288,11 +325,13 @@
 				DEVELOPMENT_TEAM = 6Q69T2CBY8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "lidar pic";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

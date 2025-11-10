@@ -452,9 +452,9 @@ struct ContentView: View {
         for name in segmentationModels {
             try? await Task.sleep(nanoseconds: 1)
             do {
-                let (segTime, mask) = try await runSegmentation(modelName: name, cgImage: cgImage)
-                let overlay = drawSegmentationOverlay(mask: mask, size: CGSize(width: 640, height: 640))
-                let result = ModelPredictionResult(modelName: name, time: segTime, overlay: overlay, count: 0)
+                let (segTime, mask, labels) = try await runSegmentation(modelName: name, cgImage: cgImage)
+                let overlay = drawSegmentationOverlay(mask: mask, size: CGSize(width: 448, height: 448))
+                let result = ModelPredictionResult(modelName: name, time: segTime, overlay: overlay, count: labels.count)
                 self.modelResults.append(result)
             } catch {
                 let result = ModelPredictionResult(modelName: name, time: 0, overlay: nil, count: 0)
@@ -521,9 +521,29 @@ struct ContentView: View {
             }
         }
     }
+    
+    func extractUniqueLabels(from semanticPredictions: MLMultiArray) -> [Int] {
+        var uniqueLabels : [Int] = []
+        let allowed_classes : [Int] = [8, 7, 1, 19, 25, 22, 18, 21, 3, 6, 9, 2, 5, 23, 112, 4, 24]
+        
+        // Iterate over the array using its shape
+        var idx:Int = 0
+        for _ in 0..<448 {
+            for _ in 0..<448 {
+                let label = semanticPredictions[idx].intValue
+                if allowed_classes.contains(label) {
+                    if !uniqueLabels.contains(label) {
+                        uniqueLabels.append(Int(label))
+                    }
+                }
+                idx += 1
+            }
+        }
+        return uniqueLabels
+    }
 
     // MARK: - Vision-based Semantic Segmentation
-    private func runSegmentation(modelName: String, cgImage: CGImage) async throws -> (Double, CVPixelBuffer) {
+    private func runSegmentation(modelName: String, cgImage: CGImage) async throws -> (Double, CVPixelBuffer, [Int]) {
         // Get or load VNCoreMLModel from cache
         let vnModel: VNCoreMLModel
         if let cached = segmentationModelCache[modelName] {
@@ -545,6 +565,7 @@ struct ContentView: View {
 
         // Prepare request
         var outputPixelBuffer: CVPixelBuffer?
+        var uniqueLabels : [Int] = []
         let request = VNCoreMLRequest(model: vnModel) { request, _ in
             if let first = request.results?.first as? VNPixelBufferObservation {
                 outputPixelBuffer = first.pixelBuffer
@@ -553,6 +574,8 @@ struct ContentView: View {
                     outputPixelBuffer = pb
                 } else if let multi = firstFV.featureValue.multiArrayValue {
                     outputPixelBuffer = maskFromMultiArray(multi)
+                    uniqueLabels = extractUniqueLabels(from: multi)
+                    print(uniqueLabels)
                 }
             }
         }
@@ -570,7 +593,7 @@ struct ContentView: View {
             print("No pixel buffer result from segmentation")
             throw NSError(domain: "Segmentation", code: -2, userInfo: [NSLocalizedDescriptionKey: "No pixel buffer result from segmentation."])
         }
-        return (time, mask)
+        return (time, mask, uniqueLabels)
     }
 
     private func drawSegmentationOverlay(mask: CVPixelBuffer, size: CGSize, tint: UIColor = .systemGreen, alpha: CGFloat = 0.35) -> UIImage? {
@@ -620,7 +643,7 @@ struct ContentView: View {
             cg.restoreGState()
         }
     }
-
+    
     // Convert a segmentation output MLMultiArray into an 8-bit mask (argmax over classes).
     // Supports shapes: [N, C, H, W], [C, H, W], [H, W, C]. Background is assumed class 0.
     private func maskFromMultiArray(_ arr: MLMultiArray) -> CVPixelBuffer? {
@@ -660,10 +683,9 @@ struct ContentView: View {
                 for w in 0..<W {
                     let idx = h * W + w
                     let v = arr[idx].doubleValue
-                    let cls = Int(v.rounded())
-                    let maskVal: UInt8 = cls == 0 ? 0 : 255
+                    let cls = UInt8(v.rounded())
                     let pixelAddr = rowPtr.advanced(by: w)
-                    pixelAddr.storeBytes(of: maskVal, as: UInt8.self)
+                    pixelAddr.storeBytes(of: cls, as: UInt8.self)
                 }
             }
             return pixelBuffer

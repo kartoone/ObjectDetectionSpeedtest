@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B74656A2EC35D1700A8C8DF /* yolo11n.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = 8BBD59ED2E896B400086E015 /* yolo11n.mlpackage */; };
+		8B74656B2EC35D1700A8C8DF /* yolo11l.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = 8BBD59EF2E896DA10086E015 /* yolo11l.mlpackage */; };
+		8B74656C2EC35D1700A8C8DF /* yolo11m.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = 8BBD59F12E896DAC0086E015 /* yolo11m.mlpackage */; };
+		8B74656D2EC35D1700A8C8DF /* yolo11s.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = 8BBD59F22E896DAC0086E015 /* yolo11s.mlpackage */; };
+		8B74656E2EC35D1700A8C8DF /* yolo11x.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = 8BBD59F32E896DAC0086E015 /* yolo11x.mlpackage */; };
+		8B74656F2EC35D1700A8C8DF /* DETRResnet50SemanticSegmentationF16.mlpackage in Resources */ = {isa = PBXBuildFile; fileRef = 8BBD59F72E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage */; };
 		8BBD59E82E8965EA0086E015 /* ModelRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59E72E8965EA0086E015 /* ModelRunner.swift */; };
 		8BBD59EA2E8965ED0086E015 /* UIImage+Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59E92E8965ED0086E015 /* UIImage+Processing.swift */; };
-		8BBD59EE2E896B400086E015 /* yolo11n.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59ED2E896B400086E015 /* yolo11n.mlpackage */; };
-		8BBD59F02E896DA10086E015 /* yolo11l.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59EF2E896DA10086E015 /* yolo11l.mlpackage */; };
-		8BBD59F42E896DAC0086E015 /* yolo11m.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F12E896DAC0086E015 /* yolo11m.mlpackage */; };
-		8BBD59F52E896DAC0086E015 /* yolo11x.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F32E896DAC0086E015 /* yolo11x.mlpackage */; };
-		8BBD59F62E896DAC0086E015 /* yolo11s.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F22E896DAC0086E015 /* yolo11s.mlpackage */; };
-		8BBD59F82E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD59F72E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +136,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B74656A2EC35D1700A8C8DF /* yolo11n.mlpackage in Resources */,
+				8B74656B2EC35D1700A8C8DF /* yolo11l.mlpackage in Resources */,
+				8B74656C2EC35D1700A8C8DF /* yolo11m.mlpackage in Resources */,
+				8B74656D2EC35D1700A8C8DF /* yolo11s.mlpackage in Resources */,
+				8B74656E2EC35D1700A8C8DF /* yolo11x.mlpackage in Resources */,
+				8B74656F2EC35D1700A8C8DF /* DETRResnet50SemanticSegmentationF16.mlpackage in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,14 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BBD59F02E896DA10086E015 /* yolo11l.mlpackage in Sources */,
-				8BBD59F42E896DAC0086E015 /* yolo11m.mlpackage in Sources */,
-				8BBD59F82E8977F20086E015 /* DETRResnet50SemanticSegmentationF16.mlpackage in Sources */,
-				8BBD59F52E896DAC0086E015 /* yolo11x.mlpackage in Sources */,
-				8BBD59F62E896DAC0086E015 /* yolo11s.mlpackage in Sources */,
 				8BBD59EA2E8965ED0086E015 /* UIImage+Processing.swift in Sources */,
 				8BBD59E82E8965EA0086E015 /* ModelRunner.swift in Sources */,
-				8BBD59EE2E896B400086E015 /* yolo11n.mlpackage in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

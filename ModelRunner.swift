@@ -37,7 +37,7 @@ final class ModelRunner {
     }
 
     /// Resize a CGImage to a target size using Core Graphics.
-    private func resizedCGImage(_ image: CGImage, to size: CGSize) -> CGImage? {
+    public func resizedCGImage(_ image: CGImage, to size: CGSize) -> CGImage? {
         let width = Int(size.width)
         let height = Int(size.height)
         guard let colorSpace = image.colorSpace else { return nil }

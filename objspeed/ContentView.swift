@@ -39,7 +39,6 @@ struct ContentView: View {
 
     @State private var modelResults: [ModelPredictionResult] = []
     @State private var modelLoadResults: [ModelLoadResult] = []
-    @State private var gridImage: UIImage?
     @State private var modelRunnerCache: [String: ModelRunner] = [:]
     @State private var segmentationModelCache: [String: VNCoreMLModel] = [:]
     @State private var isPreloadingModels: Bool = false
@@ -119,29 +118,6 @@ struct ContentView: View {
                                     .border(.secondary)
                             }
                         }
-                    } else {
-                        if let originalImage {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Original Image").font(.headline)
-                                Image(uiImage: originalImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: .infinity)
-                                    .border(.secondary)
-                            }
-                        }
-
-                        if let processedImage {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Processed (rotated 180°)").font(.headline)
-                                Image(uiImage: processedImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(maxWidth: .infinity)
-                                    .clipped()
-                                    .border(.secondary)
-                            }
-                        }
                     }
 
                     if let processedImage {
@@ -153,7 +129,7 @@ struct ContentView: View {
                                         Text("Prediction – \(result.modelName)")
                                             .font(.headline)
                                         ZStack {
-                                            Image(uiImage: gridImage ?? processedImage)
+                                            Image(uiImage: processedImage)
                                                 .resizable()
                                                 .scaledToFill()
                                                 .clipped()
@@ -327,13 +303,13 @@ struct ContentView: View {
                 }
                 let start = ContinuousClock().now
                 let loaded: VNCoreMLModel? = await Task.detached(priority: .background) { () -> VNCoreMLModel? in
-                    if let pkgURL = Bundle.main.url(forResource: name, withExtension: "mlpackage"),
-                       let mlModel = try? MLModel(contentsOf: pkgURL),
-                       let vn = try? VNCoreMLModel(for: mlModel) {
-                        return vn
-                    } else if let compiledURL = Bundle.main.url(forResource: name, withExtension: "mlmodelc"),
+                    if let compiledURL = Bundle.main.url(forResource: name, withExtension: "mlmodelc"),
                               let mlModel = try? MLModel(contentsOf: compiledURL),
                               let vn = try? VNCoreMLModel(for: mlModel) {
+                        return vn
+                    } else if let pkgURL = Bundle.main.url(forResource: name, withExtension: "mlpackage"),
+                       let mlModel = try? MLModel(contentsOf: pkgURL),
+                       let vn = try? VNCoreMLModel(for: mlModel) {
                         return vn
                     }
                     return nil
@@ -386,9 +362,6 @@ struct ContentView: View {
         let rotateComps = rotateDuration.components
         self.rotateTime = Double(rotateComps.seconds) + Double(rotateComps.attoseconds) / 1e18
 
-        self.processedImage = rotated
-        self.gridImage = rotated.resized(to: CGSize(width: 640, height: 640))
-
         // Commented out resize timing and operation
         // Resize to 640x640
         let resizeStart = ContinuousClock().now
@@ -397,13 +370,15 @@ struct ContentView: View {
         let resizeDuration = resizeStart.duration(to: resizeEnd)
         let resizeComps = resizeDuration.components
         self.resizeTime = Double(resizeComps.seconds) + Double(resizeComps.attoseconds) / 1e18
-        self.processedImage = resized
 
         // Run predictions for multiple models and time each, then draw overlays
         guard let cgImage = resized.cgImage else {
             statusMessage = "Failed to create CGImage from processed image."
             return
         }
+        
+        // Do this separately so that UI updates don't affect timing of resizing operation
+        self.processedImage = resized
 
         statusMessage = "Running predictions…"
         let detectionModels = ["yolo11n", "yolo11s", "yolo11m", "yolo11l", "yolo11x"]
